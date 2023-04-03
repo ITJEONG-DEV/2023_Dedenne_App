@@ -19,7 +19,7 @@
           ]
         }
       ],
-      "icon":"build/icon.png"
+      "icon":"images/icon.png"
     },
     "nsis": {
       "oneClick": false,
@@ -29,7 +29,8 @@
     },
     "files": [
       "dist/**/*",
-      "electron/**/*"
+      "electron/**/*",
+      "images/**/*"
     ],
     "directories": {
       "buildResources": "assets",
