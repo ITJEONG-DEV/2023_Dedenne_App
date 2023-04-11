@@ -5,15 +5,15 @@
       <v-app-bar-nav-icon>
       </v-app-bar-nav-icon>
 
-      <v-toolbar-side-icon>
+      <v-btn icon>
         <v-img
           :src="icon"
           :height="height"
           :width="width"
           style="margin-left:10px"
           contain
-        />
-      </v-toolbar-side-icon>
+        ></v-img>
+      </v-btn>
 
       <v-toolbar-title>DedenneApp</v-toolbar-title>
 
@@ -22,7 +22,7 @@
       >
         <v-text-field
           class="shrink"
-          v-model="api"
+          v-model="apiKey"
           label="API Key"
           variant="underlined"
           :disabled="disabled"
@@ -30,37 +30,40 @@
         ></v-text-field>
         <v-btn
           :icon="icon_style"
-          @click="onClickApplyAPIButton"
+          @click="onClickApplyAPIButton();"
         ></v-btn>
       </v-toolbar-items>
 </v-toolbar>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, shallowRef, onMounted } from 'vue';
 import icon from '../assets/icon.png'
+
+const props = defineProps<{
+  apiKey: string
+}>();
+
+const emit = defineEmits<{
+  (e: 'update', apiKey: string) :void,
+}>();
 
 const width = 32;
 const height = 32;
 
-const api = ref("");
 const disabled = ref(false);
 const icon_style = ref("mdi-pencil");
 
-const changeIconStyle = () => {
-  if(disabled) {
-    icon_style.value = "mdi-check"
-  } else {
-    icon_style.value = "mdi-pencil";
-  }
-}
+const apiKey = ref<string>("");
 
 const onClickApplyAPIButton = () => {
-  if(disabled.value) {
-    disabled.value = false;
-  } else {
-    disabled.value = true;
-    console.log(api.value)
+  if(apiKey.value.length > 0) {
+    if(disabled.value) {
+      disabled.value = false;
+    } else {
+      disabled.value = true;
+      emit('update', apiKey.value);
+    }
   }
   checkCurrentButtonIcon();
 }
@@ -69,7 +72,7 @@ const checkCurrentButtonIcon = () => {
   if(disabled.value) {
     icon_style.value = "mdi-cog-outline"
   } else {
-    if( api.value.length == 0 ) {
+    if( apiKey.value.length == 0 ) {
       icon_style.value = "mdi-pencil"
     } else {
       icon_style.value = "mdi-check"
@@ -78,6 +81,10 @@ const checkCurrentButtonIcon = () => {
 }
 
 onMounted(() => {
+  apiKey.value = props.apiKey;
+  if(props.apiKey != "") {
+    disabled.value = true;
+  }
   checkCurrentButtonIcon();
 })
 
