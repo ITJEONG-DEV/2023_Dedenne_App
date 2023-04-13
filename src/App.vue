@@ -3,9 +3,12 @@
     <v-main>
       <LogoBar
         :api-key="apiKey"
+        :main-color="mainColor"
         @update="updateApiKeyValue"
       ></LogoBar>
-      <News></News>
+      <News
+        :main-color="mainColor"
+      ></News>
     </v-main>
   </v-app>
 </template>
@@ -18,6 +21,16 @@ import News from './components/News.vue'
 import { setApiKey } from './Requests'
 
 const apiKey = ref<string>("");
+
+// red pink purple
+// deep-purple indigo blue
+// light-blue cyan teal
+// green light-green lime
+// yellow amber orange
+// deep-oragne brown blue-gray
+// grey shades
+
+const mainColor = "orange"
 
 const updateApiKeyValue = (value: string) => {
   apiKey.value = value;

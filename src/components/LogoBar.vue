@@ -1,6 +1,7 @@
 <template>
     <v-toolbar
       prominent
+      :color="props.mainColor + '-lighten-5'"
     >
       <v-app-bar-nav-icon>
       </v-app-bar-nav-icon>
@@ -42,6 +43,7 @@ import icon from '../assets/icon.png'
 
 const props = defineProps<{
   apiKey: string
+  mainColor: string
 }>();
 
 const emit = defineEmits<{

@@ -3,20 +3,22 @@
 <br>
 
 ### 목차
+
+<br>
+
+1. [환경 설정](#1-환경-설정)
+2. [Electron](#2-electron)
+3. [Vue & Vite & Vuetify](#3-vue--vite--vuetify)
+4. [js & ts](#4-js--ts)
+
+<br>
+<br>
+
 ---
 
 <br>
 
-1. [환경 설정](#환경-설정)
-2. [Electron](#electron)
-3. [Vue & Vite & Vuetify](#vue--vite--vuetify)
-4. [js & ts](#js--ts)
-
-<br>
-<br>
-
-### 환경 설정
----
+### 1. 환경 설정
 
 <br>
 
@@ -31,8 +33,11 @@
 <br>
 <br>
 
-### Electron
 ---
+
+<br>
+
+### 2. Electron
 
 <br>
 
@@ -43,9 +48,13 @@
     - [Class: MenuItem](https://www.electronjs.org/docs/latest/api/menu-item)
 
 <br>
+<br>
 
-### Vue & Vite & Vuetify
 ---
+
+<br>
+
+### 3. Vue & Vite & Vuetify
 
 <br>
 
@@ -64,13 +73,39 @@
 
 <br>
 
-### js & ts
+- LifeCycle
+    - [생명 주기 훅](https://ko.vuejs.org/guide/essentials/lifecycle.html)
+
+<br>
+
+- Colors
+    - [Colors](https://vuetifyjs.com/en/styles/colors/)
+    - [[Vue.js] 요소의 속성을 데이터로 지정하는 : v-bind](https://lieadaon.tistory.com/381)
+
+<br>
+
+- v-dialog
+    - [v-dialog API](https://vuetifyjs.com/en/api/v-dialog/)
+
+<br>
+
+- shallowRef()
+    - [Reactivity API: Advanced](https://vuejs.org/api/reactivity-advanced.html)
+
+<br>
+<br>
+
 ---
+
+<br>
+
+### 4. js & ts
 
 <br>
 
 - fetch
     - [fetch 함수: POST Request](https://velog.io/@seoltang/fetch-POST-Request)
+    - [[Vue.js] Ajax(Fetch)통신](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=phy920&logNo=221496033301)
 
 <br>
 
@@ -83,5 +118,10 @@
     - [How do I get the current time only in JavaScript](https://stackoverflow.com/questions/10599148/how-do-i-get-the-current-time-only-in-javascript)
     - [Date.prototype.getDate()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getDate)
     - [JavaScript Date - parse()를 사용하여 경과된 년, 일, 시, 분, 초 구하기, 윤년(elapsed) 계산](https://carrotweb.tistory.com/161)
+
+<br>
+<br>
+
+---
 
 <br>

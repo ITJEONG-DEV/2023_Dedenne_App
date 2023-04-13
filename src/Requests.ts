@@ -73,7 +73,7 @@ function checkTimeGap(loadedDate: string): boolean {
   return new Date().getUTCMilliseconds() - Date.parse(loadedDate) > timeGap;
 }
 
-async function request(url: string, method: string, data: JSON | null = null) {
+async function request(url: string, method: string, data: JSON | null = null): Promise<JSON | null> {
 
   let request_necessity = false;
 
@@ -107,10 +107,41 @@ async function request(url: string, method: string, data: JSON | null = null) {
   return result;
 }
 
-export async function getNewsNotices() {
+export interface INotice {
+  Date: string,
+  Link: string,
+  Title: string,
+  Type: string
+}
+
+export interface INoticeList {
+}
+
+export class Notice implements INotice {
+  Date: string = "";
+  Link: string = "";
+  Title: string = "";
+  Type: string = "";
+
+  constructor(date: string, link: string, title: string, type: string) {
+    this.Date = date;
+    this.Link = link;
+    this.Title = title;
+    this.Type = type;
+  }
+}
+
+
+export async function getNewsNotices(): Promise<Notice[]> {
   const url = "/news/notices";
 
-  return await request(url, "GET", null);
+  const result = await request(url, "GET", null);
+
+  let noticeList: Array<Notice> = Object.assign(new Array<Notice>(), result);
+
+  console.log("result: " + result)
+
+  return noticeList;
 }
 
 
