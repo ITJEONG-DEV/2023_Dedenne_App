@@ -1,6 +1,9 @@
 <template>
-
-<p class="text-h4 pb-6">Events</p>
+  <ContentsTitle
+    title="Events"
+    @refresh="emit('refresh');"
+  >
+  </ContentsTitle>
 
   <v-sheet
     class="d-flex justify-center flex-wrap mx-auto"
@@ -34,6 +37,7 @@
 </template>
 
 <script setup lang="ts">
+import ContentsTitle from './ContentsTitle.vue'
 import { Event } from '../Requests'
 
 const props = defineProps<{
@@ -43,6 +47,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'detail', link: string): void
+  (e: 'refresh'): void
 }>();
 
 </script>

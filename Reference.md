@@ -93,6 +93,12 @@
     - [Reactivity API: Advanced](https://vuejs.org/api/reactivity-advanced.html)
 
 <br>
+
+- watch
+    - [[vue] composition-api 에서 watch 사용법](https://min9nim.github.io/2019/09/composition-api-watch/)
+    - [computed vs watch](https://v2.ko.vuejs.org/v2/guide/computed.html)
+
+<br>
 <br>
 
 ---

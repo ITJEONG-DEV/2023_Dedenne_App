@@ -7,6 +7,7 @@
       :main-color="props.mainColor"
       :items="news"
       @detail="onClickBrowser"
+      @refresh="refreshNews(true);"
     ></NewsList>
   </div>
 
@@ -18,6 +19,7 @@
       :main-color="props.mainColor"
       :current_items="events"
       @detail="onClickBrowser"
+      @refresh="refreshEvent(true);"
     ></EventList>
   </div>
 
@@ -64,10 +66,17 @@ const onClickBrowser = (link: string) => {
   vLink.value = link;
 }
 
+const refreshNews = async (force: boolean = false) => {
+  news.value = await getNewsNotices(force);
+}
+
+const refreshEvent = async (force: boolean = false) => {
+  events.value = await getNewsEvents(force);
+}
 
 onMounted(async () => {
-  news.value = await getNewsNotices();
-  events.value = await getNewsEvents();
+  refreshNews();
+  refreshEvent();
 })
 
 </script>

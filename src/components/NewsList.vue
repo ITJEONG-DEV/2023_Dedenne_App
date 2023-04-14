@@ -1,5 +1,9 @@
 <template>
-  <p class="text-h4 pb-6">News</p>
+  <ContentsTitle
+    title="News"
+    @refresh="emit('refresh');"
+  >
+  </ContentsTitle>
 
   <v-sheet
     class="justify-center flex-wrap mx-auto"
@@ -12,9 +16,8 @@
           :key="item.Link"
           class="mx-auto"
       >
-        <v-item-title>
+        <v-list-item-title>
           [{{ item.Type }}] {{ item.Title }}
-
           <v-btn
             variant="text"
             :color="props.mainColor+'-darken-4'"
@@ -22,7 +25,7 @@
           >
             더보기
           </v-btn>
-        </v-item-title>
+        </v-list-item-title>
         <v-divider></v-divider>
       </v-list-item>
 
@@ -59,6 +62,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, shallowRef, watch } from 'vue';
+import ContentsTitle from './ContentsTitle.vue'
 import { Notice } from '../Requests'
 
 const props = defineProps<{
@@ -68,6 +72,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'detail', link: string): void
+  (e: 'refresh'): void
 }>();
 
 const pageNumber = ref<number>(0);

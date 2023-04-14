@@ -73,13 +73,15 @@ function checkTimeGap(loadedDate: string): boolean {
   return new Date().getUTCMilliseconds() - Date.parse(loadedDate) > timeGap;
 }
 
-async function request(url: string, method: string, data: JSON | null = null): Promise<JSON | null> {
+async function request(url: string, method: string, data: JSON | null = null, force: boolean): Promise<JSON | null> {
 
   let request_necessity = false;
 
   const localInfo = localStorage.getItem(url);
 
-  if(localInfo == null) {
+  if(force) {
+    request_necessity = true;
+  } else if(localInfo == null) {
     request_necessity = true;
   } else {
     const json = JSON.parse(localInfo);
@@ -157,20 +159,20 @@ export class Event implements IEvent {
   }
 }
 
-export async function getNewsNotices(): Promise<Notice[]> {
+export async function getNewsNotices(force: boolean): Promise<Notice[]> {
   const url = "/news/notices";
 
-  const result = await request(url, "GET", null);
+  const result = await request(url, "GET", null, force);
 
   let noticeList: Array<Notice> = Object.assign(new Array<Notice>(), result);
 
   return noticeList;
 }
 
-export async function getNewsEvents(): Promise<Event[]> {
+export async function getNewsEvents(force: boolean): Promise<Event[]> {
   const url = "/news/events";
 
-  const result = await request(url, "GET", null);
+  const result = await request(url, "GET", null, force);
 
   let eventList: Array<Event> = Object.assign(new Array<Event>(), result);
 
