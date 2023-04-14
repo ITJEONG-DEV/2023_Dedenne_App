@@ -107,14 +107,12 @@ async function request(url: string, method: string, data: JSON | null = null): P
   return result;
 }
 
-export interface INotice {
+// Notice
+interface INotice {
   Date: string,
   Link: string,
   Title: string,
   Type: string
-}
-
-export interface INoticeList {
 }
 
 export class Notice implements INotice {
@@ -131,6 +129,33 @@ export class Notice implements INotice {
   }
 }
 
+// Event
+interface IEvent {
+  Title: string,
+  Thumbnail: string,
+  Link: string,
+  StartDate: string,
+  EndDate: string,
+  RewardDate?: string
+}
+
+export class Event implements IEvent {
+  Title: string = "";
+  Thumbnail: string = "";
+  Link: string = "";
+  StartDate: string = "";
+  EndDate: string = "";
+  RewardDate?: string;
+
+  constructor(title: string, thumbnail: string, link: string, startDate: string, endDate: string, rewardDate?: string) {
+    this.Title = title;
+    this.Thumbnail = thumbnail;
+    this.Link = link;
+    this.StartDate = startDate;
+    this.EndDate = endDate;
+    this.RewardDate = rewardDate;    
+  }
+}
 
 export async function getNewsNotices(): Promise<Notice[]> {
   const url = "/news/notices";
@@ -139,9 +164,15 @@ export async function getNewsNotices(): Promise<Notice[]> {
 
   let noticeList: Array<Notice> = Object.assign(new Array<Notice>(), result);
 
-  console.log("result: " + result)
-
   return noticeList;
 }
 
+export async function getNewsEvents(): Promise<Event[]> {
+  const url = "/news/events";
 
+  const result = await request(url, "GET", null);
+
+  let eventList: Array<Event> = Object.assign(new Array<Event>(), result);
+
+  return eventList;
+}

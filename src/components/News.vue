@@ -1,10 +1,24 @@
 <template>
-
-  <div id="NewsView">
+  <div
+    id="NewsView"
+    class="pa-6 ma-2"
+  >
     <NewsList
       :main-color="props.mainColor"
-      :current_items="current_news"
+      :items="news"
+      @detail="onClickBrowser"
     ></NewsList>
+  </div>
+
+  <div
+    id="EventsView"
+    class="pa-6 ma-2"
+  >
+    <EventList
+      :main-color="props.mainColor"
+      :current_items="events"
+      @detail="onClickBrowser"
+    ></EventList>
   </div>
 
   <v-dialog
@@ -27,19 +41,23 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, shallowRef } from 'vue';
+import { onMounted, ref } from 'vue';
 import NewsList from './NewsList.vue'
-import { getNewsNotices, Notice } from '../Requests'
+import EventList from './EventList.vue'
+import { getNewsNotices, getNewsEvents, Notice, Event } from '../Requests'
 
 const props = defineProps<{
   mainColor: string
 }>();
 
 const news = ref<Array<Notice>>();
-const current_news = shallowRef<Array<Notice>>();
+
+const events = ref<Array<Event>>();
 
 const dialog = ref<boolean>(false);
 const vLink = ref<string>("");
+
+const refresh = ref<boolean>(false);
 
 const onClickBrowser = (link: string) => {
   dialog.value = true;
@@ -49,7 +67,7 @@ const onClickBrowser = (link: string) => {
 
 onMounted(async () => {
   news.value = await getNewsNotices();
-  current_news.value = news.value.slice(0, 5);
+  events.value = await getNewsEvents();
 })
 
 </script>

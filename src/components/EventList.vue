@@ -1,18 +1,24 @@
 <template>
 
-<p class="text-h4">Events</p>
+<p class="text-h4 pb-6">Events</p>
 
   <v-sheet
-    class="justify-center flex-wrap mx-auto"
+    class="d-flex justify-center flex-wrap mx-auto"
   >
     <v-card
+      width="30%"
       v-for="item in props.current_items"
         :key="item.Link"
-        class="mx-auto"
+        class="mx-auto ma-2"
     >
 
+      <!-- <v-img
+        :src="item.Thumbnail"
+        width="100%"
+      ></v-img> -->
+
       <v-card-text>
-        [{{ item.Type }}] {{ item.Title }}
+        {{ item.Title }}
 
         <v-btn
           variant="text"
@@ -28,11 +34,11 @@
 </template>
 
 <script setup lang="ts">
-import { Notice } from '../Requests'
+import { Event } from '../Requests'
 
 const props = defineProps<{
   mainColor: string,
-  current_items?: Array<Notice>
+  current_items?: Array<Event>
 }>();
 
 const emit = defineEmits<{
