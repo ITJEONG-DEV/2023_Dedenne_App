@@ -44,8 +44,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import NewsList from './NewsList.vue'
-import EventList from './EventList.vue'
+import NewsList from '../components/NewsList.vue'
+import EventList from '../components/EventList.vue'
 import { getNewsNotices, getNewsEvents, Notice, Event } from '../Requests'
 
 const props = defineProps<{
