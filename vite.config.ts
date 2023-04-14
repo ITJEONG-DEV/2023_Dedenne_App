@@ -8,7 +8,6 @@ import vuetify from 'vite-plugin-vuetify'
 export default defineConfig({
   base: process.env.ELECTRON=="true" ? './' : ".",
   define: {
-	  'global': {},
   },
   plugins: [
 		vue({
