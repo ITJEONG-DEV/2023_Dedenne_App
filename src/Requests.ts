@@ -159,6 +159,34 @@ export class Event implements IEvent {
   }
 }
 
+// CharacterInfo
+interface ICharacterInfo {
+  ServerName: string,
+  CharacterName: string,
+  CharacterLevel: number,
+  CharacterClassName: string,
+  ItemAvgLevel: string,
+  ItemMaxLevel: string
+}
+
+export class CharacterInfo implements ICharacterInfo {
+  ServerName: string = "";
+  CharacterName: string = "";
+  CharacterLevel: number = 0;
+  CharacterClassName: string  ="";
+  ItemAvgLevel: string = "";
+  ItemMaxLevel: string = "";
+
+  constructor(serverName: string, characterName: string, characterLevel: number, characterClassName: string, itemAvgLevel: string, itemMaxLevel: string) {
+    this.ServerName = serverName;
+    this.CharacterName = characterName;
+    this.CharacterLevel = characterLevel;
+    this.CharacterClassName = characterClassName;
+    this.ItemAvgLevel = itemAvgLevel;
+    this.ItemMaxLevel = itemMaxLevel;
+  }
+}
+
 export async function getNewsNotices(force: boolean): Promise<Notice[]> {
   const url = "/news/notices";
 
@@ -177,4 +205,14 @@ export async function getNewsEvents(force: boolean): Promise<Event[]> {
   let eventList: Array<Event> = Object.assign(new Array<Event>(), result);
 
   return eventList;
+}
+
+export async function getCharactersSiblings(characterName: string, force: boolean): Promise<CharacterInfo[]> {
+  const url = `/characters/${characterName}/siblings`;
+
+  const result = await request(url, "GET", null, force);
+
+  let charcterList: Array<CharacterInfo> = Object.assign(new Array<CharacterInfo>(), result);
+
+  return charcterList;
 }

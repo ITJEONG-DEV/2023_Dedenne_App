@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onBeforeMount, ref } from 'vue'
+import { onMounted, onBeforeMount, ref, watch } from 'vue'
 import LogoBar from './components/LogoBar.vue'
 import NewsVue from './vue/News.vue'
 import CharacterVue from './vue/Character.vue'
@@ -77,8 +77,6 @@ const current_menu = ref<string>("NEWS");
 
 const updateApiKeyValue = (value: string) => {
   apiKey.value = value;
-  localStorage.setItem('apiKey', apiKey.value);
-  setApiKey(apiKey.value);
 }
 
 const loadApiKey = () => {
@@ -95,6 +93,12 @@ const loadApiKey = () => {
 const onChangeCurrentMenu = (menu: string) => {
   current_menu.value = menu;
 }
+
+watch(() => apiKey.value, (newValue, oldValue) => {
+  localStorage.setItem('apiKey', apiKey.value);
+  setApiKey(apiKey.value);
+})
+
 
 onBeforeMount(() => {
   loadApiKey();
