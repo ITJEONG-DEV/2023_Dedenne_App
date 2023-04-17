@@ -99,6 +99,11 @@
     - [computed vs watch](https://v2.ko.vuejs.org/v2/guide/computed.html)
 
 <br>
+
+- Spacing
+    - [Spacing](https://vuetifyjs.com/en/styles/spacing/)
+
+<br>
 <br>
 
 ---

@@ -110,29 +110,15 @@ async function request(url: string, method: string, data: JSON | null = null, fo
 }
 
 // Notice
-interface INotice {
+export interface INotice {
   Date: string,
   Link: string,
   Title: string,
   Type: string
 }
 
-export class Notice implements INotice {
-  Date: string = "";
-  Link: string = "";
-  Title: string = "";
-  Type: string = "";
-
-  constructor(date: string, link: string, title: string, type: string) {
-    this.Date = date;
-    this.Link = link;
-    this.Title = title;
-    this.Type = type;
-  }
-}
-
 // Event
-interface IEvent {
+export interface IEvent {
   Title: string,
   Thumbnail: string,
   Link: string,
@@ -141,26 +127,8 @@ interface IEvent {
   RewardDate?: string
 }
 
-export class Event implements IEvent {
-  Title: string = "";
-  Thumbnail: string = "";
-  Link: string = "";
-  StartDate: string = "";
-  EndDate: string = "";
-  RewardDate?: string;
-
-  constructor(title: string, thumbnail: string, link: string, startDate: string, endDate: string, rewardDate?: string) {
-    this.Title = title;
-    this.Thumbnail = thumbnail;
-    this.Link = link;
-    this.StartDate = startDate;
-    this.EndDate = endDate;
-    this.RewardDate = rewardDate;    
-  }
-}
-
 // CharacterInfo
-interface ICharacterInfo {
+export interface ICharacterInfo {
   ServerName: string,
   CharacterName: string,
   CharacterLevel: number,
@@ -169,50 +137,287 @@ interface ICharacterInfo {
   ItemMaxLevel: string
 }
 
-export class CharacterInfo implements ICharacterInfo {
-  ServerName: string = "";
-  CharacterName: string = "";
-  CharacterLevel: number = 0;
-  CharacterClassName: string  ="";
-  ItemAvgLevel: string = "";
-  ItemMaxLevel: string = "";
-
-  constructor(serverName: string, characterName: string, characterLevel: number, characterClassName: string, itemAvgLevel: string, itemMaxLevel: string) {
-    this.ServerName = serverName;
-    this.CharacterName = characterName;
-    this.CharacterLevel = characterLevel;
-    this.CharacterClassName = characterClassName;
-    this.ItemAvgLevel = itemAvgLevel;
-    this.ItemMaxLevel = itemMaxLevel;
-  }
+// Stat
+export interface IStat {
+  Type: string,
+  Value: string,
+  Tooptip: Array<string>
 }
 
-export async function getNewsNotices(force: boolean): Promise<Notice[]> {
+// Tendency
+interface ITendency {
+  Type: string,
+  Point: number,
+  MaxPoint: number
+}
+
+// ArmoryProfile
+export interface IArmoryProfile {
+  CharacterImage: string;
+  ExpeditionLevel: number;
+  PvpGradeName: string;
+  TownLevel: number;
+  TownName: string;
+  Title: string;
+  GuildMemeberGrade: string;
+  GuildName: string;
+  UsingSkillPoint: number;
+  TotalSkillPoint: number;
+  Stats: Array<IStat>;
+  Tendencies: Array<ITendency>;
+  ServerName: string;
+  CharacterName: string;
+  CharacterLevel: number;
+  CharacterClassName: string;
+  ItemAvgLevel: string;
+  ItemMaxLevel: string;
+}
+
+// ArmoryEquipment
+export interface IArmoryEquipment {
+  Type: string;
+  Name: string;
+  Icon: string;
+  Grade: string;
+  Tooltip: string;
+}
+
+// ArmoryAvatar
+export interface IArmoryAvatar {
+  Type: string;
+  Name: string;
+  Icon: string;
+  Grade: string;
+  IsSet: boolean;
+  IsInner: boolean;
+  Tooltip: string;
+}
+
+// SkillTripod
+export interface ISkillTripod {
+  Tier: number;
+  Slot: number;
+  Name: string;
+  Icon: string;
+  Level: number;
+  IsSelected: boolean;
+  Tooltip: string;
+}
+
+// SkillRune
+export interface ISkillRune {
+  Name: string;
+  Icon: string;
+  Grade: string;
+  Tooltip: string;
+}
+
+// ArmorySkill
+export interface IArmorySkill {
+  Name: string;
+  Icon: string;
+  Level: number;
+  Type: string;
+  IsAwakening: boolean;
+  Tripods: Array<ISkillTripod>;
+  Rune: Array<ISkillRune>;
+}
+
+// Engraving
+export interface IEngraving {
+  Slot: number;
+  Name: string;
+  Icon: string;
+  Tooltip: string;
+}
+
+// Effect
+export interface IEffect {
+  Name: string;
+  Description: string;
+}
+
+// ArmoryEngraving
+export interface IArmoryEngraving {
+  Engravings: Array<IEngraving>;
+  Effects: Array<IEffect>;
+}
+
+// Card
+export interface ICard {
+  Slot: number;
+  Name: string;
+  Icon: string;
+  AwakeCount: number;
+  AwakeTotal: number;
+  Grade: string;
+  Tooltip: string;
+}
+
+// ArmoryCard
+export interface IArmoryCard {
+  Cards: Array<ICard>;
+}
+
+// CardEffect
+export interface ICardEffect {
+  Index: number;
+  CardSlots: Array<number>;
+  Items: Array<IEffect>;
+}
+
+// Gem
+export interface IGem {
+  Slot: number;
+  Name: string;
+  Icon: string;
+  Level: number;
+  Grade: string;
+  Tooltip: string;
+}
+
+// GemEffect
+export interface IGemEffect {
+  GemSlot: number;
+  Name: string;
+  Description: string;
+  Icon: string;
+  Tooltip: string;
+}
+
+// ArmoryGem
+export interface IArmoryGem {
+  Gems: Array<IGem>;
+  Effects: Array<IGemEffect>;
+}
+
+// AggregationTeamDeathMatchRank
+export interface IAggregationTeamDeathMatchRank {
+  Rank: number;
+  RankName: string;
+  RankIcon: string;
+  RankLastMmr: number;
+  PlayCount: number;
+  VictoryCount: number;
+  LoseCount: number;
+  TieCount: number;
+  KillCount: number;
+  aceCount: number;
+  DeathCount: number;
+}
+
+// Aggregation
+export interface IAggregation {
+  PlayCount: number;
+  VictoryCount: number;
+  LoseCount: number;
+  TieCount: number;
+  KillCount: number;
+  AceCount: number;
+  DeathCount: number;
+}
+
+// AggregationElimination
+export interface IAggregationElimination {
+  FirstWinCount: number;
+  SecondWinCount: number;
+  ThirdWinCount: number;
+  FirstPlayCount: number;
+  SecondPlayCount: number;
+  ThirdPlayCount: number;
+  AllKillCount: number;
+  PlayCount: number;
+  VictoryCount: number;
+  LoseCount: number;
+  TieCount: number;
+  KillCount: number;
+  AceCount: number;
+  DeathCount: number;
+}
+
+// Colosseum
+export interface IColosseum {
+  SeasonName: string;
+  Competitive: Array<IAggregationTeamDeathMatchRank>;
+  TeamDeathmatch: Array<IAggregation>;
+  Deathmatch: Array<IAggregation>;
+  TeamElimination: Array<IAggregationElimination>;
+  CoOpBattle: Array<IAggregation>;
+}
+
+// ColosseumInfo
+export interface IColosseumInfo {
+  Rank: number;
+  PreRank: number;
+  Exp: number;
+  Colosseums: Array<IColosseum>;
+}
+
+// CollectiblePoint
+export interface ICollectiblePoint {
+  PointName: string;
+  Point: number;
+  MaxPoint: number;
+}
+
+// Collectible
+export interface ICollectible {
+  Type: string;
+  Icon: string;
+  Point: number;
+  MaxPoint: number;
+  CollectiblePoints: Array<ICollectiblePoint>;
+}
+
+// Profile
+export interface IProfile {
+  ArmoryProfile: IArmoryProfile;
+  ArmoryEquipment: Array<IArmoryEquipment>;
+  ArmoryAvatars: Array<IArmoryAvatar>;
+  ArmorySkills: Array<IArmorySkill>;
+  ArmoryEngraving: IArmoryEngraving;
+  ArmoryCards: IArmoryCard;
+  ArmoryGem: IArmoryGem;
+  ColosseumInfo: IColosseumInfo;
+  Collectibles: Array<ICollectible>;
+}
+
+export async function getNewsNotices(force: boolean): Promise<INotice[]> {
   const url = "/news/notices";
 
   const result = await request(url, "GET", null, force);
 
-  let noticeList: Array<Notice> = Object.assign(new Array<Notice>(), result);
+  let noticeList: Array<INotice> = Object.assign(new Array<INotice>(), result);
 
   return noticeList;
 }
 
-export async function getNewsEvents(force: boolean): Promise<Event[]> {
+export async function getNewsEvents(force: boolean): Promise<IEvent[]> {
   const url = "/news/events";
 
   const result = await request(url, "GET", null, force);
 
-  let eventList: Array<Event> = Object.assign(new Array<Event>(), result);
+  let eventList: Array<IEvent> = Object.assign(new Array<IEvent>(), result);
 
   return eventList;
 }
 
-export async function getCharactersSiblings(characterName: string, force: boolean): Promise<CharacterInfo[]> {
+export async function getCharactersSiblings(characterName: string, force: boolean): Promise<ICharacterInfo[]> {
   const url = `/characters/${characterName}/siblings`;
 
   const result = await request(url, "GET", null, force);
 
-  let charcterList: Array<CharacterInfo> = Object.assign(new Array<CharacterInfo>(), result);
+  let charcterList: Array<ICharacterInfo> = Object.assign(new Array<ICharacterInfo>(), result);
+
+  return charcterList;
+}
+
+export async function getArmoriesCharacters(characterName: string, force: boolean): Promise<IProfile> {
+  const url = `/armories/characters/${characterName}`;
+
+  const result = await request(url, "GET", null, force);
+
+  let charcterList: IProfile = result as unknown as IProfile;
 
   return charcterList;
 }
