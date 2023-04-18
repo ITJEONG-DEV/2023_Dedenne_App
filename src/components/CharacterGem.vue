@@ -1,34 +1,74 @@
 <template>
   <v-sheet>
     <v-list
-      class="d-flex"
+      class="d-flex ml-1"
     >
       <v-list-item
-        class="justify-center"
-        v-for="item in props.gems?.Gems.slice(0, props.gems?.Gems.length/2)"
+        class="justify-center ma-1 pa-0"
+        v-for="item in props.gems?.Gems"
         :key="item.Icon"
       >
-        <v-img
-          :src="item.Icon"
+      <template v-if="item.Grade == '전설'">
+          <v-card
+            variant="outlined"
+            class="legend"
+            width="32px"
+            height="36px"
+          >
+            <v-img
+              :src="item.Icon"
+            ></v-img>
+          </v-card>
+        </template>
+
+        <template v-else-if="item.Grade == '유물'">
+          <v-card
+            variant="outlined"
+            class="artifact"
+            width="32px"
+            height="36px"
+          >
+            <v-img
+              :src="item.Icon"
+            ></v-img>
+          </v-card>
+        </template>
+
+        <template v-else-if="item.Grade == '고대'">
+          <v-card
+            variant="outlined"
+            class="ancient"
+            width="32px"
+            height="36px"
+          >
+            <v-img
+              :src="item.Icon"
+            ></v-img>
+          </v-card>
+        </template>
+
+        <template v-else>
+          <v-card
+            variant="outlined"
+            class="mb-1 default"
+            width="32px"
+            height="36px"
+          >
+            <v-img
+              :src="item.Icon"
+            ></v-img>
+          </v-card>
+        </template>
+
+        <v-card
+          variant="outlined"
+          class="ma-0 pa-0"
           width="32px"
-          height="32px"
-        ></v-img>
-        <v-list-item-subtitle v-text="item.Name.includes('홍') ? item.Name.split('>')[2].split('<')[0].split('레벨')[0] + '홍' : item.Name.split('>')[2].split('<')[0].split('')[0] + '멸' "></v-list-item-subtitle>
-      </v-list-item>
-    </v-list>
-    <v-list
-      class="d-flex"
-    >
-      <v-list-item
-        v-for="item in props.gems?.Gems.slice(props.gems?.Gems.length/2,)"
-        :key="item.Icon"
-      >
-        <v-img
-          :src="item.Icon"
-          width="32px"
-          height="32px"
-        ></v-img>
-        <v-list-item-subtitle v-text="item.Name.includes('홍') ? item.Name.split('>')[2].split('<')[0].split('레벨')[0] + '홍' : item.Name.split('>')[2].split('<')[0].split('')[0] + '멸' "></v-list-item-subtitle>
+          height="16px"
+          style="top: -8px; background-color: white; font-size:10px; font-weight:bold; text-align:center;"
+        >
+          {{ item.Name.split('>')[2].split('<')[0].split('레벨')[0] }}
+        </v-card>     
       </v-list-item>
     </v-list>
   </v-sheet>
