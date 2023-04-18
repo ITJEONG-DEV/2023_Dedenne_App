@@ -20,6 +20,7 @@
       :current_items="events"
       @detail="onClickBrowser"
       @refresh="refreshEvent(true);"
+      :dev="props.dev"
     ></EventList>
   </div>
 
@@ -51,6 +52,7 @@ import { getNewsNotices, getNewsEvents } from '../Requests'
 
 const props = defineProps<{
   mainColor: string
+  dev: boolean
 }>();
 
 const news = ref<Array<INotice>>();

@@ -14,12 +14,13 @@
         :key="item.Link"
         class="mx-auto ma-2"
     >
-
-      <!-- <v-img
-        :src="item.Thumbnail"
-        width="100%"
-      ></v-img> -->
-
+      <template v-if="!props.dev">
+        <v-img
+          :src="item.Thumbnail"
+          width="100%"
+        ></v-img>
+      </template>
+      
       <v-card-text>
         {{ item.Title }}
 
@@ -38,11 +39,12 @@
 
 <script setup lang="ts">
 import ContentsTitle from './ContentsTitle.vue'
-import { Event } from '../Requests'
+import { IEvent } from '../Requests'
 
 const props = defineProps<{
   mainColor: string,
-  current_items?: Array<Event>
+  current_items?: Array<IEvent>
+  dev: boolean
 }>();
 
 const emit = defineEmits<{

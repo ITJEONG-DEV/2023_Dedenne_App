@@ -20,29 +20,30 @@
         ></v-text-field>
       </div>
     </template>
+    <template v-else>
+      <ContentsTitle
+        title="Profile"
+        @refresh="refreshCharactersInfo(characterName, true)"
+      >
+      </ContentsTitle>
 
-    <ContentsTitle
-      title="Profile"
-      @refresh="refreshCharactersInfo(characterName, true)"
-    >
-    </ContentsTitle>
+      <div 
+        id="default_profile"
+        class="d-flex"
+      >
+        <CharacterDefaultProfile
+          :data="profile"
+          :mainColor="props.mainColor"
+          :dev="props.dev"
+        ></CharacterDefaultProfile>
 
-    <div 
-      id="default_profile"
-      class="d-flex"
-    >
-      <CharacterDefaultProfile
-        :data="profile"
-        :mainColor="props.mainColor"
-      ></CharacterDefaultProfile>
+        <CharacterMainProfile
+          :data="profile"
+          :mainColor="props.mainColor"
+        ></CharacterMainProfile>
 
-      <CharacterMainProfile
-        :data="profile"
-        :mainColor="props.mainColor"
-      ></CharacterMainProfile>
-
-    </div>
-
+      </div>
+    </template>
 </v-sheet>
 
 </template>
@@ -57,12 +58,13 @@ import { getCharactersSiblings, getArmoriesCharacters } from '../Requests'
 
 const props = defineProps<{
   mainColor: string
+  dev: boolean
 }>();
 
 const charactersInfo = ref<Array<ICharacterInfo>>();
 const profile = ref<IProfile>();
 
-const search = ref<boolean>(true);
+const search = ref<boolean>(false);
 
 const loading = ref<boolean>(false);
 const characterName = ref<string>("");
@@ -94,7 +96,10 @@ const refreshCharactersInfo = async (name: string, force: boolean = false) => {
 }
 
 onMounted(async () => {
-  refreshCharactersInfo('데덴네귀여워', false);
+  if(props.dev) {
+    search.value = true;
+    refreshCharactersInfo('데덴네귀여워', false);
+  }
 })
 
 </script>

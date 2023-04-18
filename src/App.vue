@@ -12,30 +12,35 @@
       <template v-if="current_menu=='NEWS'">
         <NewsVue
           :main-color="mainColor"
+          :dev="dev"
         ></NewsVue>
       </template>
 
       <template v-if="current_menu=='CHARACTERS'">
         <CharacterVue
           :main-color="mainColor"
+          :dev="dev"
         ></CharacterVue>
       </template>
 
       <template v-if="current_menu=='AUCTIONS'">
         <AuctionsVue
           :main-color="mainColor"
+          :dev="dev"
         ></AuctionsVue>
       </template>
 
       <template v-if="current_menu=='MARKETS'">
         <MarketsVue
           :main-color="mainColor"
+          :dev="dev"
         ></MarketsVue>
       </template>
 
       <template v-if="current_menu=='GAMECONTENTS'">
         <GameContentsVue
           :main-color="mainColor"
+          :dev="dev"
         ></GameContentsVue>
       </template>
 
@@ -54,6 +59,7 @@ import GameContentsVue from './vue/GameContents.vue'
 import { setApiKey } from './Requests'
 
 const apiKey = ref<string>("");
+const dev = true;
 
 // red pink purple
 // deep-purple indigo blue
@@ -106,25 +112,72 @@ onBeforeMount(() => {
 </script>
 
 <style>
+/* */
+.quality_0 {
+  color: rgb(255, 0, 0);
+}
+
+.quality_0_bg {
+  background: rgb(255, 0, 0);
+}
+
+.quality_10 {
+  color: rgb(167, 147, 0);
+}
+
+.quality_10_bg {
+  background: rgb(167, 147, 0);
+}
+
+.quality_30 {
+  color: rgb(9, 174, 9);
+}
+
+.quality_30_bg {
+  background: rgb(9, 174, 9);
+}
+
+.quality_70 {
+  color: rgb(18, 96, 235);
+}
+.quality_70_bg {
+  background: rgb(18, 96, 235);
+}
+
+.quality_90 {
+  color: rgb(223, 24, 227);
+}
+.quality_90_bg {
+  background: rgb(223, 24, 227);
+}
+
+.quality_100 {
+  color: rgb(234, 104, 17);
+}
+.quality_100_bg {
+  background: rgb(234, 104, 17);
+}
+
+
 /* default */
-.default {
+.default_bg {
   background: rgb(48,48,48);
 }
 
 /* 전설 */
-.legend {
+.legend_bg {
   background: rgb(158,95,4);
   background: linear-gradient(135deg, rgba(54,32,3,0.8) 0%, rgba(158,95,4,1) 70%);
 }
 
 /* 유물 */
-.artifact {
+.artifact_bg {
   background: rgb(162,64,6);
   background: linear-gradient(135deg, rgba(52,26,9,0.8) 0%, rgba(162,64,6,1) 70%);
 }
 
 /* 고대 */
-.ancient {
+.ancient_bg {
   background: rgb(220,201,153);
   background: linear-gradient(135deg, rgba(61,51,37,0.8) 0%, rgba(220,201,153,1) 70%);
 }

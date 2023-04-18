@@ -63,11 +63,11 @@
 <script setup lang="ts">
 import { onMounted, ref, shallowRef, watch } from 'vue';
 import ContentsTitle from './ContentsTitle.vue'
-import { Notice } from '../Requests'
+import { INotice } from '../Requests'
 
 const props = defineProps<{
   mainColor: string,
-  items?: Array<Notice>
+  items?: Array<INotice>
 }>();
 
 const emit = defineEmits<{
@@ -76,7 +76,7 @@ const emit = defineEmits<{
 }>();
 
 const pageNumber = ref<number>(0);
-const currentItem = shallowRef<Array<Notice>>();
+const currentItem = shallowRef<Array<INotice>>();
 
 watch(() => props.items, (newValue, oldValue) => {
   currentItem.value = props.items?.slice(pageNumber.value*5, (pageNumber.value+1)*5)

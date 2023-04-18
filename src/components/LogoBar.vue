@@ -118,6 +118,7 @@ const checkCurrentButtonIcon = () => {
 
 const onClickSideMenu = (item: string) => {
   emit('update-mode', item);
+  show_navigation_drawer.value = false;
 }
 
 onMounted(() => {
