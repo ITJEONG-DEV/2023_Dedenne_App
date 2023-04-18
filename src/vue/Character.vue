@@ -24,20 +24,16 @@
   >
     <CharacterDefaultProfile
       :data="profile"
+      :mainColor="props.mainColor"
     ></CharacterDefaultProfile>
 
     <CharacterMainProfile
       :data="profile"
-    >
-    </CharacterMainProfile>
+      :mainColor="props.mainColor"
+    ></CharacterMainProfile>
 
   </div>
 
-  <div id="select">
-  </div>
-
-  <div id="">
-  </div>
 </template>
 
 <script setup lang="ts">

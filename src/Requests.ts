@@ -254,16 +254,17 @@ export interface ICard {
   Tooltip: string;
 }
 
-// ArmoryCard
-export interface IArmoryCard {
-  Cards: Array<ICard>;
-}
-
 // CardEffect
 export interface ICardEffect {
   Index: number;
   CardSlots: Array<number>;
   Items: Array<IEffect>;
+}
+
+// ArmoryCard
+export interface IArmoryCard {
+  Cards: Array<ICard>;
+  Effects: Array<ICardEffect>;
 }
 
 // Gem
@@ -376,7 +377,7 @@ export interface IProfile {
   ArmoryAvatars: Array<IArmoryAvatar>;
   ArmorySkills: Array<IArmorySkill>;
   ArmoryEngraving: IArmoryEngraving;
-  ArmoryCards: IArmoryCard;
+  ArmoryCard: IArmoryCard;
   ArmoryGem: IArmoryGem;
   ColosseumInfo: IColosseumInfo;
   Collectibles: Array<ICollectible>;
