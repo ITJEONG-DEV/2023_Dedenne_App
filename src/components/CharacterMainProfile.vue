@@ -3,9 +3,7 @@
     class="justify-center ma-2 px-4"
   >
     <v-list
-      id="menu"
-      class="d-flex ma-0 pa-0 mb-5"
-      height="50px"
+      class="d-flex ma-0 mb-5 pa-0"
       border
     >
       <v-list-item
@@ -13,68 +11,83 @@
         :key="item.key"
         :value="item.value"
         :active-color="props.mainColor"
+        @click="onClickMenu(item.key)"
       >
         <v-list-item-title>{{ item.value }}</v-list-item-title>
       </v-list-item>
     </v-list>
     
-    <v-card
-      class="d-flex"
-      color="#15181D"
-      min-width="1000px"
-      min-height="430px"
-    >
-      <div>
-        <div
-          id="equipment"
-          class="d-flex"
-        >
-          <CharacterEquipmentVue
-            :equipments="equipments"
-            width="300px"
-            height="360px"
-            border
-          ></CharacterEquipmentVue>
+    <template v-if="current_menu == 'battle'">
+      <v-card
+        class="d-flex"
+        color="#15181D"
+        min-width="1030px"
+        min-height="550px"
+      >
+        <div>
+          <div
+            id="equipment"
+            class="d-flex"
+          >
+            <CharacterEquipmentVue
+              :equipments="equipments"
+              width="330px"
+              height="360px"
+              border
+            ></CharacterEquipmentVue>
 
-          <CharacterEquipmentVue
-            :equipments="accessories"
-            width="300px"
-            height="360px"
-            border
-          ></CharacterEquipmentVue>
+            <CharacterEquipmentVue
+              :equipments="accessories"
+              width="270px"
+              height="360px"
+              border
+            ></CharacterEquipmentVue>
+          </div>
+
+          <div
+            id="engraving"
+          >
+            <CharacterEngraving
+              :engraving="props.data?.ArmoryEngraving"
+              width="600px"
+              height="190px"
+              border
+            ></CharacterEngraving>
+          </div>
+
         </div>
 
-        <div
-          id="engraving"
-        >
-          <CharacterEngraving
-            :engraving="props.data?.ArmoryEngraving"
-            width="600px"
-            height="190px"
+        <v-card>
+          <CharacterGemVue
+            id="gem"
+            :gems="props.data?.ArmoryGem"
+            width="450px"
+            height="150px"
             border
-          ></CharacterEngraving>
-        </div>
+          ></CharacterGemVue>
 
-      </div>
-
-      <v-card>
-        <CharacterGemVue
-          id="gem"
-          :gems="props.data?.ArmoryGem"
-          width="450px"
-          height="150px"
-          border
-        ></CharacterGemVue>
-
-        <CharacterCardVue
-          id="card"
-          :card="props.data?.ArmoryCard"
-          width="450px"
-          height="400px"
-          border
-        ></CharacterCardVue>
+          <CharacterCardVue
+            id="card"
+            :card="props.data?.ArmoryCard"
+            width="450px"
+            height="400px"
+            border
+          ></CharacterCardVue>
+        </v-card>
       </v-card>
-    </v-card>
+    </template>
+
+    <template v-if="current_menu == 'collectible'">
+      <v-card
+        class="d-flex"
+        color="#15181D"
+        min-width="1030px"
+        min-height="550px"
+      >
+
+      </v-card>
+
+    </template>
   </v-sheet>
 </template>
 
@@ -100,6 +113,12 @@ const menu_list = [
   { value: "전투", key: "battle"},
   { value: "내실", key: "collectible"}
 ]
+
+const current_menu = ref<string>("battle")
+
+const onClickMenu = (key: string) => {
+  current_menu.value = key;
+}
 
 watch(() => props.data?.ArmoryEquipment, (newValue, oldValue) => {
   if(props.data == null) return;

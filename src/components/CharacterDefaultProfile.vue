@@ -5,19 +5,19 @@
     <v-card
       color="#15181D"
       width="500px"
-      height="500px"
+      height="620px"
     >
       <!-- <v-img
-        src="data?.ArmoryProfile.CharacterImage"
+        :src="data?.ArmoryProfile.CharacterImage"
         class="align-end"
         width="500px"
-        height="500px"
+        height="620px"
       > -->
 
       <v-img
         class="align-end"
-        width="500px"
-        height="500px"
+        width="100%"
+        height="100%"
       >
         <!-- 서버 -->
         <v-chip

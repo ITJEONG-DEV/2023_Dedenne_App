@@ -1,42 +1,54 @@
 <template>
-  <template v-if="!search">
-    <div
-      id="character_input"
-      class="pa-6 ma-2"
-    >
-      <v-text-field
-        v-model="characterName"
-        :loading="loading"
-        density="compact"
-        variant="solo"
-        label="캐릭터명 입력"
-        append-inner-icon="mdi-magnify"
-        single-line
-        hide-details
-        @click:append-inner="onClickSearch()"
-      ></v-text-field>
-    </div>
-  </template>
-
-  <div 
-    id="default_profile"
-    class="d-flex pa-4 ma-2"
+  <v-sheet
+    class="pa-6 ma-2"
   >
-    <CharacterDefaultProfile
-      :data="profile"
-      :mainColor="props.mainColor"
-    ></CharacterDefaultProfile>
+    <template v-if="!search">
+      <div
+        id="character_input"
+        class="pa-6 ma-2"
+      >
+        <v-text-field
+          v-model="characterName"
+          :loading="loading"
+          density="compact"
+          variant="solo"
+          label="캐릭터명 입력"
+          append-inner-icon="mdi-magnify"
+          single-line
+          hide-details
+          @click:append-inner="onClickSearch()"
+        ></v-text-field>
+      </div>
+    </template>
 
-    <CharacterMainProfile
-      :data="profile"
-      :mainColor="props.mainColor"
-    ></CharacterMainProfile>
+    <ContentsTitle
+      title="Profile"
+      @refresh="refreshCharactersInfo(characterName, true)"
+    >
+    </ContentsTitle>
 
-  </div>
+    <div 
+      id="default_profile"
+      class="d-flex"
+    >
+      <CharacterDefaultProfile
+        :data="profile"
+        :mainColor="props.mainColor"
+      ></CharacterDefaultProfile>
+
+      <CharacterMainProfile
+        :data="profile"
+        :mainColor="props.mainColor"
+      ></CharacterMainProfile>
+
+    </div>
+
+</v-sheet>
 
 </template>
 
 <script setup lang="ts">
+import ContentsTitle from '../components/ContentsTitle.vue'
 import CharacterDefaultProfile from '../components/CharacterDefaultProfile.vue'
 import CharacterMainProfile from '../components/CharacterMainProfile.vue'
 import { onMounted, ref } from 'vue';

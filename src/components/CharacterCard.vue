@@ -31,15 +31,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue'
 import type { IArmoryCard } from '../Requests';
 
 const props = defineProps<{
     card?: IArmoryCard
 }>();
-
-onMounted(() => {
-  console.log("cards", props.card)
-})
 
 </script>

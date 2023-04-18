@@ -104,3 +104,28 @@ onBeforeMount(() => {
   loadApiKey();
 })
 </script>
+
+<style>
+/* default */
+.default {
+  background: rgb(48,48,48);
+}
+
+/* 전설 */
+.legend {
+  background: rgb(158,95,4);
+  background: linear-gradient(135deg, rgba(54,32,3,0.8) 0%, rgba(158,95,4,1) 70%);
+}
+
+/* 유물 */
+.artifact {
+  background: rgb(162,64,6);
+  background: linear-gradient(135deg, rgba(52,26,9,0.8) 0%, rgba(162,64,6,1) 70%);
+}
+
+/* 고대 */
+.ancient {
+  background: rgb(220,201,153);
+  background: linear-gradient(135deg, rgba(61,51,37,0.8) 0%, rgba(220,201,153,1) 70%);
+}
+</style>
