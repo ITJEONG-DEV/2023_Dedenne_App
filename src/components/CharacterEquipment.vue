@@ -7,12 +7,11 @@
       class="d-flex"
     >
       <template v-slot:prepend>
-        <template v-if="item.Grade == '전설'">
           <v-card
             variant="outlined"
-            class="mr-2 legend"
+            :class="'mr-2 ' + (item.Grade == '전설' ? 'legend_bg' : item.Grade == '유물' ? 'artifact_bg' : item.Grade == '고대' ? 'ancient_bg' : 'default_bg')"
             width="32px"
-            height="36px"
+            :height="item.Type == '팔찌' ? '32px' : '36px'"
           >
             <v-img
               :src="item.Icon"
@@ -20,105 +19,35 @@
               height="32px"
             ></v-img>
           </v-card>
-        </template>
 
-        <template v-else-if="item.Grade == '유물' && item.Type == '팔찌'">
-          <v-card
-            variant="outlined"
-            class="mr-2 artifact"
-            width="32px"
-            height="32px"
-          >
-            <v-img
-              :src="item.Icon"
-              width="32px"
-              height="32px"
-            ></v-img>
-          </v-card>
-        </template>
-
-        <template v-else-if="item.Grade == '유물'">
-          <v-card
-            variant="outlined"
-            class="mr-2 artifact"
-            width="32px"
-            height="36px"
-          >
-            <v-img
-              :src="item.Icon"
-              width="32px"
-              height="32px"
-            ></v-img>
-          </v-card>
-        </template>
-
-        <template v-else-if="item.Grade == '고대' && item.Type == '팔찌'">
-          <v-card
-            variant="outlined"
-            class="mr-2 ancient"
-            width="32px"
-            height="32px"
-          >
-            <v-img
-              :src="item.Icon"
-              width="32px"
-              height="32px"
-            ></v-img>
-          </v-card>
-        </template>
-
-        <template v-else-if="item.Grade == '고대'">
-          <v-card
-            variant="outlined"
-            class="mr-2 ancient"
-            width="32px"
-            height="36px"
-          >
-            <v-img
-              :src="item.Icon"
-              width="32px"
-              height="32px"
-            ></v-img>
-          </v-card>
-        </template>
-
-        <template v-else>
-          <v-card
-            variant="outlined"
-            class="mr-2 default"
-            width="32px"
-            height="36px"
-          >
-            <v-img
-              :src="item.Icon"
-              width="32px"
-              height="32px"
-            ></v-img>
-          </v-card>
-        </template>
-
-        <template v-if="item.Type=='어빌리티 스톤'">
+        <template v-if="item.Type == '어빌리티 스톤'">
           <v-card
             variant="outlined"
             class="ma-0 pa-0"
             width="32px"
             height="16px"
-            style="position:absolute; top: 36px; background-color: white; font-size:10px; font-weight:bold; text-align:center;"
+            style="position:absolute; top: 36px; background-color: black; font-size:10px; font-weight:bold; text-align:center;"
           >
-            {{ getAbilitystoneText(item.Tooltip) }}
+            <span
+              class="quality_10 ma-0 pa-0"
+            >
+              {{ getAbilitystoneText(item.Tooltip).slice(0,3) }}
+            </span>
+            <span
+              class="quality_0 ma-0 pa-0"
+            >
+              {{ getAbilitystoneText(item.Tooltip).slice(3) }}
+            </span>
           </v-card> 
         </template>
 
-        <template v-else-if="item.Type=='팔찌'">
-        </template>
-        
-        <template v-else>
+        <template v-else-if="item.Type != '팔찌'">
           <v-card
             variant="outlined"
-            class="ma-0 pa-0"
+            :class="'ma-0 pa-0 ' + (getQuality(item.Tooltip) == 100 ? 'quality_100_bg' : getQuality(item.Tooltip) > 90 ? 'quality_90_bg' : getQuality(item.Tooltip) > 70 ? 'quality_70_bg' : getQuality(item.Tooltip) > 30 ? 'quality_30_bg' : getQuality(item.Tooltip) > 10 ? 'quality_10_bg' : 'quality_0_bg' )"
             width="32px"
             height="16px"
-            style="position:absolute; top: 36px; background-color: white; font-size:10px; font-weight:bold; text-align:center;"
+            style="position:absolute; top: 36px; font-size:10px; font-weight:bold; text-align:center; color:white; border-color: black;"
           >
             {{ getQualityText(item.Tooltip) }}
           </v-card> 
@@ -146,6 +75,10 @@ function getQualityText(tooltip: string): string {
   }
 
   return "";
+}
+
+function getQuality(tooltip: string): number {
+  return Number(getQualityText(tooltip));
 }
 
 function getAbilitystoneText(tooltip: string): string {
