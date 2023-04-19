@@ -79,7 +79,7 @@ const menus = [
   { title : "컨텐츠", key : "GAMECONTENTS"},
 ]
 
-const current_menu = ref<string>("NEWS");
+const current_menu = ref<string>("CHARACTERS");
 
 const updateApiKeyValue = (value: string) => {
   apiKey.value = value;
@@ -112,7 +112,50 @@ onBeforeMount(() => {
 </script>
 
 <style>
-/* */
+
+/* card for crop */
+
+/* 전설-금색 */
+.centered-and-cropped-gold {
+  top: 0px;
+  left: -277px;
+  min-width: 408px;
+  object-fit: cover;
+}
+
+/* 영웅-보라 */
+.centered-and-cropped-purple {
+  top: 0px;
+  left: -208px;
+  min-width: 408px;
+  object-fit: cover;
+}
+
+/* 희귀-파랑 */
+.centered-and-cropped-blue {
+  top: 0px;
+  left: -139px;
+  min-width: 408px;
+  object-fit: cover;
+}
+
+/* 고급-초록 */
+.centered-and-cropped-green {
+  top: 0px;
+  left: -70px;
+  min-width: 408px;
+  object-fit: cover;
+}
+
+/* 일반-회색 */
+.centered-and-cropped-gray {
+  top: 0px;
+  left: -1px;
+  min-width: 408px;
+  object-fit: cover;
+}
+
+/* 품질별 색상 */
 .quality_0 {
   color: rgb(255, 0, 0);
 }
