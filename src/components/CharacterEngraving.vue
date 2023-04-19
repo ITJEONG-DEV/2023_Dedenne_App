@@ -25,9 +25,7 @@
     </v-list>
 
 
-    <v-list
-      class="d-flex"
-    >
+    <v-list>
       <v-list-item
         class="justify-center"
         v-for="item in props.engraving?.Effects"

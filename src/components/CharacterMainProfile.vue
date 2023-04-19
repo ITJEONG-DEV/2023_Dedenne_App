@@ -3,10 +3,11 @@
     class="justify-center ma-2 px-4"
   >
     <v-list
-      class="d-flex ma-0 mb-5 pa-0"
+      class="d-flex ma-0 mb-4 pa-0"
       border
     >
       <v-list-item
+        height="50px"
         v-for="item in menu_list"
         :key="item.key"
         :value="item.value"
@@ -45,19 +46,27 @@
           </div>
 
           <div
-            id="engraving"
+            id="card"
           >
-            <CharacterEngraving
-              :engraving="props.data?.ArmoryEngraving"
+            <CharacterCardVue
+              id="card"
+              :card="props.data?.ArmoryCard"
               width="600px"
               height="190px"
               border
-            ></CharacterEngraving>
+            ></CharacterCardVue>
           </div>
 
         </div>
 
         <v-card>
+          <CharacterEngraving
+              :engraving="props.data?.ArmoryEngraving"
+              width="450px"
+              height="400px"
+              border
+            ></CharacterEngraving>
+
           <CharacterGemVue
             id="gem"
             :gems="props.data?.ArmoryGem"
@@ -66,13 +75,7 @@
             border
           ></CharacterGemVue>
 
-          <CharacterCardVue
-            id="card"
-            :card="props.data?.ArmoryCard"
-            width="450px"
-            height="400px"
-            border
-          ></CharacterCardVue>
+
         </v-card>
       </v-card>
     </template>
