@@ -114,44 +114,11 @@ onBeforeMount(() => {
 <style>
 
 /* card for crop */
-
-/* 전설-금색 */
-.centered-and-cropped-gold {
+.centered-and-cropped {
   top: 0px;
-  left: -277px;
-  min-width: 408px;
-  object-fit: cover;
-}
-
-/* 영웅-보라 */
-.centered-and-cropped-purple {
-  top: 0px;
-  left: -208px;
-  min-width: 408px;
-  object-fit: cover;
-}
-
-/* 희귀-파랑 */
-.centered-and-cropped-blue {
-  top: 0px;
-  left: -139px;
-  min-width: 408px;
-  object-fit: cover;
-}
-
-/* 고급-초록 */
-.centered-and-cropped-green {
-  top: 0px;
-  left: -70px;
-  min-width: 408px;
-  object-fit: cover;
-}
-
-/* 일반-회색 */
-.centered-and-cropped-gray {
-  top: 0px;
-  left: -1px;
-  min-width: 408px;
+  left: 0px;
+  width: 90px;
+  height: 130px;
   object-fit: cover;
 }
 
