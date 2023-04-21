@@ -26,6 +26,7 @@
     <template v-else>
       <ContentsTitle
         title="Profile"
+        :is-black="true"
         @refresh="refreshCharactersInfo(characterName, true)"
       >
       </ContentsTitle>
@@ -78,14 +79,6 @@ const characterName = ref<string>("");
 
 // const bgColor = "#15181D";
 const bgColor = "#292a2e";
-
-const info_list = [
-  { title : "전투", key:"BATTLE"}, // 장비, 품질, 세트효과, 장신구, 각인효과, 카드, 보석
-  { title : "아바타", key:"AVARTARS"}, // 아바타
-  { title : "내실", key : "AUCTIONS"}, // 내실장비
-  { title : "스킬", key : "SKILLS"},
-]
-const current_selection = "기본"
 
 const onClickSearch = async() => {
   search.value = true;
