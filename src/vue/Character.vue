@@ -1,11 +1,13 @@
 <template>
   <v-sheet
     class="pa-6 ma-2"
+    style="background-color: #15181D;"
   >
     <template v-if="!search">
       <div
         id="character_input"
         class="pa-6 ma-2"
+        style="background-color: #15181D;"
       >
         <v-text-field
           v-model="characterName"
@@ -20,6 +22,7 @@
         ></v-text-field>
       </div>
     </template>
+
     <template v-else>
       <ContentsTitle
         title="Profile"
@@ -30,15 +33,18 @@
       <div 
         id="default_profile"
         class="d-flex"
+        style="background-color: #15181D;"
       >
         <CharacterDefaultProfile
           :data="profile"
+          :bg="bgColor"
           :mainColor="props.mainColor"
           :dev="props.dev"
         ></CharacterDefaultProfile>
 
         <CharacterMainProfile
           :data="profile"
+          :bg="bgColor"
           :mainColor="props.mainColor"
         ></CharacterMainProfile>
 
@@ -68,6 +74,9 @@ const search = ref<boolean>(false);
 
 const loading = ref<boolean>(false);
 const characterName = ref<string>("");
+
+// const bgColor = "#15181D";
+const bgColor = "#292a2e";
 
 const info_list = [
   { title : "전투", key:"BATTLE"}, // 장비, 품질, 세트효과, 장신구, 각인효과, 카드, 보석

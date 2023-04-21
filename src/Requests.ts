@@ -182,6 +182,11 @@ export interface IArmoryEquipment {
   Tooltip: string;
 }
 
+export interface IEquipment {
+  name: string;
+  value: IArmoryEquipment | null;
+}
+
 // ArmoryAvatar
 export interface IArmoryAvatar {
   Type: string;

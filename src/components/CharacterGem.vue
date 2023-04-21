@@ -1,7 +1,10 @@
 <template>
-  <v-sheet>
+  <v-sheet
+    :style="'background-color: '+ props.bg + ';'"
+  >
     <v-list
       class="d-flex ml-1"
+      :style="'background-color: '+ props.bg + ';'"
     >
       <v-list-item
         class="justify-center ma-1 pa-0"
@@ -21,10 +24,10 @@
 
         <v-card
           variant="outlined"
-          class="ma-0 pa-0 text-white"
+          class="ma-0 pa-0"
           width="32px"
           height="16px"
-          style="top: -8px; background-color: black; font-size:10px; text-align:center; border-color: black;"
+          style="top: -8px; background-color: #15181D; color: rgb(199, 170, 0); font-size:10px; font-weight: bold; text-align:center; border-color: black;"
         >
           {{ item.Name.split('>')[2].split('<')[0].split('레벨')[0] }}
         </v-card>     
@@ -38,5 +41,6 @@ import type { IArmoryGem } from '../Requests';
 
 const props = defineProps<{
     gems?: IArmoryGem
+    bg: string
 }>();
 </script>

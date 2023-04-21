@@ -1,9 +1,10 @@
 <template>
   <v-sheet
     class="justify-center ma-2"
+    style="background-color: #15181D;"
   >
     <v-card
-      color="#15181D"
+      :color="props.bg"
       width="500px"
       height="620px"
     >
@@ -290,5 +291,7 @@ import type { IProfile } from '../Requests'
 const props = defineProps<{
   data?: IProfile
   dev: boolean
+  bg: string
+  mainColor: string
 }>();
 </script>

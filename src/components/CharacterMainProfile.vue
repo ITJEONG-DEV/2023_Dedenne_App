@@ -1,9 +1,11 @@
 <template>
   <v-sheet
-    class="justify-center ma-2 px-4"
+    class="justify-center my-2 px-2"
+    style="background-color: #15181D;"
   >
     <v-list
       class="d-flex ma-0 mb-4 pa-0"
+      :style="'background-color: ' + props.bg + ';'"
       border
     >
       <v-list-item
@@ -12,17 +14,22 @@
         :key="item.key"
         :value="item.value"
         :active-color="props.mainColor"
+        :active="isActive(item.key)"
         @click="onClickMenu(item.key)"
       >
-        <v-list-item-title>{{ item.value }}</v-list-item-title>
+        <v-list-item-title
+          :style="'font-weight: bold; color: white;'"
+        >
+          {{ item.value }}
+        </v-list-item-title>
       </v-list-item>
     </v-list>
     
     <template v-if="current_menu == 'battle'">
       <v-card
         class="d-flex"
-        color="#15181D"
-        min-width="1030px"
+        :color="props.bg"
+        width="1050px"
         min-height="550px"
       >
         <div>
@@ -32,6 +39,7 @@
           >
             <CharacterEquipmentVue
               :equipments="equipments"
+              :bg="props.bg"
               width="330px"
               height="360px"
               border
@@ -39,18 +47,18 @@
 
             <CharacterEquipmentVue
               :equipments="accessories"
+              :bg="props.bg"
               width="270px"
               height="360px"
               border
             ></CharacterEquipmentVue>
           </div>
 
-          <div
-            id="card"
-          >
+          <div>
             <CharacterCardVue
               id="card"
               :card="props.data?.ArmoryCard"
+              :bg="props.bg"
               width="600px"
               height="190px"
               border
@@ -61,20 +69,22 @@
 
         <v-card>
           <CharacterEngraving
-              :engraving="props.data?.ArmoryEngraving"
-              width="450px"
-              height="400px"
-              border
-            ></CharacterEngraving>
+            id="engraving"
+            :engraving="props.data?.ArmoryEngraving"
+            :bg="props.bg"
+            width="450px"
+            height="400px"
+            border
+          ></CharacterEngraving>
 
           <CharacterGemVue
             id="gem"
             :gems="props.data?.ArmoryGem"
+            :bg="props.bg"
             width="450px"
             height="150px"
             border
           ></CharacterGemVue>
-
 
         </v-card>
       </v-card>
@@ -83,10 +93,15 @@
     <template v-if="current_menu == 'collectible'">
       <v-card
         class="d-flex"
-        color="#15181D"
-        min-width="1030px"
+        :color="props.bg"
+        width="1050px"
         min-height="550px"
       >
+        <CharacterCollectibles
+          :collectibles="data?.Collectibles"
+          :main-color="props.mainColor"
+          :bg="props.bg"
+        ></CharacterCollectibles>
 
       </v-card>
 
@@ -96,19 +111,21 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import type { IProfile, IArmoryEquipment } from '../Requests'
+import type { IProfile, IArmoryEquipment, IEquipment } from '../Requests'
 import CharacterEquipmentVue from './CharacterEquipment.vue'
 import CharacterGemVue from './CharacterGem.vue'
 import CharacterCardVue from './CharacterCard.vue'
 import CharacterEngraving from './CharacterEngraving.vue'
+import CharacterCollectibles from './CharacterCollectibles.vue'
 
 const props = defineProps<{
   data?: IProfile
   mainColor: string
+  bg: string
 }>();
 
-const equipments = ref<Array<IArmoryEquipment>>();
-const accessories = ref<Array<IArmoryEquipment>>();
+const equipments = ref<Array<IEquipment>>();
+const accessories = ref<Array<IEquipment>>();
 const stone = ref<IArmoryEquipment>();
 const bracelet = ref<IArmoryEquipment>();
 
@@ -123,29 +140,77 @@ const onClickMenu = (key: string) => {
   current_menu.value = key;
 }
 
+const isActive = (key: string) => {
+  if(current_menu.value == key) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 watch(() => props.data?.ArmoryEquipment, (newValue, oldValue) => {
   if(props.data == null) return;
+  if(props.data.ArmoryEquipment.length == 0) return;
 
-  // equipments
-  equipments.value = [];
-  for(var i=1; i<6; i++) {
-    equipments.value.push(props.data.ArmoryEquipment[i]);
+  equipments.value = Array<IEquipment>();
+  accessories.value = Array<IEquipment>();
+
+  let equipment_sequence = ['무기', '투구', '상의', '하의', '장갑', '어깨', '목걸이', '귀걸이', '귀걸이', '반지', '반지', '어빌리티 스톤', '팔찌']
+
+  let index = 0;
+  let weapon: IArmoryEquipment | null = null;
+  for(var i=0; i<props.data.ArmoryEquipment.length; i++) {
+    var item = props.data.ArmoryEquipment[i];
+
+    while(item.Type == equipment_sequence[index]) {
+      if(item.Type == equipment_sequence[index]) {
+        break;
+      }
+
+      if(index == 0) {
+        weapon = null;
+      } else if(index < 6) {
+        equipments.value.push({name: equipment_sequence[index], value: null})
+      } else {
+        accessories.value.push({name: equipment_sequence[index], value: null})
+      }
+
+      index++;
+
+
+      if(index > equipment_sequence.length) {
+        break;
+      }
+    }
+
+    if(index > equipment_sequence.length) {
+      break;
+    }
+
+
+    if(item.Type == '무기') {
+      weapon = item;
+    }
+    else if(['투구', '상의', '하의', '장갑', '어깨'].includes(item.Type)) {
+      equipments.value.push({name: item.Type, value: item});
+    }
+
+    else if(['목걸이', '귀걸이', '반지', '팔찌', '어빌리티 스톤'].includes(item.Type)) {
+      if(item.Type == '팔찌') {
+        bracelet.value = item;
+      } else if (item.Type == '어빌리티 스톤') {
+        stone.value = item;
+      }
+
+      accessories.value.push({name: item.Type, value: item});
+    }
   }
-  equipments.value.push(props.data.ArmoryEquipment[0]);
 
-  // accessories
-  accessories.value = [];
-  for(var i=6; i<11; i++) {
-    accessories.value.push(props.data.ArmoryEquipment[i]);
+  if(weapon == null) {
+    equipments.value.push({name: '무기', value: null});
+  } else {
+    equipments.value.push({name: weapon.Type, value: weapon});
   }
-  accessories.value.push(props.data.ArmoryEquipment[11]);
-  accessories.value.push(props.data.ArmoryEquipment[12]);
-
-  // stone
-  stone.value = props.data.ArmoryEquipment[11];
-
-  // bracelet
-  bracelet.value = props.data.ArmoryEquipment[12];
 })
 
 </script>
