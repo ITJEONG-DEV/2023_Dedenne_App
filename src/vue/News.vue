@@ -45,8 +45,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import NewsList from '../components/NewsList.vue'
-import EventList from '../components/EventList.vue'
+import NewsList from '../components/News/NewsList.vue'
+import EventList from '../components/News/EventList.vue'
 import type { INotice, IEvent } from '../Requests'
 import { getNewsNotices, getNewsEvents } from '../Requests'
 

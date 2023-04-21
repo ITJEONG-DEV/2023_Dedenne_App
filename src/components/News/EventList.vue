@@ -1,6 +1,7 @@
 <template>
   <ContentsTitle
     title="Events"
+    :is-black="false"
     @refresh="emit('refresh');"
   >
   </ContentsTitle>
@@ -38,8 +39,8 @@
 </template>
 
 <script setup lang="ts">
-import ContentsTitle from './ContentsTitle.vue'
-import { IEvent } from '../Requests'
+import ContentsTitle from '../ContentsTitle.vue'
+import { IEvent } from '../../Requests'
 
 const props = defineProps<{
   mainColor: string,

@@ -1,6 +1,7 @@
 <template>
   <ContentsTitle
     title="News"
+    :is-black="false"
     @refresh="emit('refresh');"
   >
   </ContentsTitle>
@@ -62,8 +63,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref, shallowRef, watch } from 'vue';
-import ContentsTitle from './ContentsTitle.vue'
-import { INotice } from '../Requests'
+import ContentsTitle from '../ContentsTitle.vue'
+import { INotice } from '../../Requests'
 
 const props = defineProps<{
   mainColor: string,

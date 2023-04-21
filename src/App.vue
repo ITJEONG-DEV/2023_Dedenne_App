@@ -1,6 +1,8 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main
+      :style="'background: ' + (current_menu=='CHARACTERS'? '#07080A': '#ffffff')"
+    >
       <LogoBar
         :api-key="apiKey"
         :main-color="mainColor"
