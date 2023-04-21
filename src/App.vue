@@ -115,6 +115,7 @@ onBeforeMount(() => {
 
 /* card for crop */
 .centered-and-cropped {
+  padding: 1px;
   top: 0px;
   left: 0px;
   width: 90px;
@@ -170,6 +171,10 @@ onBeforeMount(() => {
 
 
 /* default */
+.none_bg {
+  background: rgb(100, 100, 100);
+}
+
 .default_bg {
   background: rgb(48,48,48);
 }
