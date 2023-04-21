@@ -4,7 +4,7 @@
     style="background-color: #15181D;"
   >
     <v-card
-      :color="props.bg"
+      color="#15181D"
       width="500px"
       height="620px"
     >

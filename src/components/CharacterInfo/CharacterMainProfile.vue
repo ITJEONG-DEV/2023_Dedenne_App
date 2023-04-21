@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     class="justify-center my-2 px-2"
-    style="background-color: #15181D;"
+    style="background-color: #07080A;"
   >
     <v-list
       class="d-flex ma-0 mb-4 pa-0"
@@ -40,6 +40,7 @@
             <CharacterEquipmentVue
               :equipments="equipments"
               :bg="props.bg"
+              :dev="props.dev"
               width="330px"
               height="360px"
               border
@@ -48,6 +49,7 @@
             <CharacterEquipmentVue
               :equipments="accessories"
               :bg="props.bg"
+              :dev="props.dev"
               width="270px"
               height="360px"
               border
@@ -59,6 +61,7 @@
               id="card"
               :card="props.data?.ArmoryCard"
               :bg="props.bg"
+              :dev="props.dev"
               width="600px"
               height="190px"
               border
@@ -72,6 +75,7 @@
             id="engraving"
             :engraving="props.data?.ArmoryEngraving"
             :bg="props.bg"
+            :dev="props.dev"
             width="450px"
             height="400px"
             border
@@ -81,6 +85,7 @@
             id="gem"
             :gems="props.data?.ArmoryGem"
             :bg="props.bg"
+            :dev="props.dev"
             width="450px"
             height="150px"
             border
@@ -101,6 +106,7 @@
           :collectibles="data?.Collectibles"
           :main-color="props.mainColor"
           :bg="props.bg"
+          :dev="props.dev"
         ></CharacterCollectibles>
 
       </v-card>
@@ -110,7 +116,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import type { IProfile, IArmoryEquipment, IEquipment } from '../Requests'
 import CharacterEquipmentVue from './CharacterEquipment.vue'
 import CharacterGemVue from './CharacterGem.vue'
@@ -122,6 +128,7 @@ const props = defineProps<{
   data?: IProfile
   mainColor: string
   bg: string
+  dev: boolean
 }>();
 
 const equipments = ref<Array<IEquipment>>();

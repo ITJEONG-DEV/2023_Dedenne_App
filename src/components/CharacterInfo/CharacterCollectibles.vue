@@ -2,6 +2,7 @@
   <v-sheet
     :style="'background: ' + props.bg + ';'"
     width="1050px"
+    height="550px"
     class="pa-0 ma-0"
   >
     <template v-if="props.collectibles != null">
@@ -16,103 +17,116 @@
           :key="j"
         >
           <v-list-item
-            class="pt-1"
-            height="50px"
+            class="pa-0 ma-0"
+            width="262.5px"
+            height="275px"
             :active-color="props.mainColor"
             :active="isActive(props.collectibles[i*4+j].Type)"
             @click="onClickMenu(props.collectibles[i*4+j].Type)"
             border
           >
-            <template v-slot:prepend>
-              <v-avatar
-                class="mr-3 pa-0"
+            <v-sheet
+              :style="'background: ' + props.bg + ';'"
+              class="ma-0 pa-0"
+              width="262.5px"
+              height="275px"
+            >
+              <v-img
+                cover
+                class="align-end"
+                width="262.5px"
+                height="275px"
+                :src="props.dev ? '' : props.collectibles[i*4+j].Icon"
               >
-                <v-img
-                  cover
-                  :src="props.collectibles[i*4+j].Icon"
-                ></v-img>
-              </v-avatar>        
-            </template>
-            <div>
-              <v-list-item-title
-                style="font-weight: bold; color: white;"
-              >
-                {{ props.collectibles[i*4+j].Type }}
-              </v-list-item-title>
+                <v-spacer></v-spacer>
 
-              <v-list-item-subtitle
-                style="font-weight: bold; color: white;"
-              >
-                {{ getCollectibleText(i*4+j) }}
-              </v-list-item-subtitle>
-            </div>
+                <v-chip
+                  style="font-weight: bold;"
+                  class="ml-3 mr-2 my-4"
+                  color="white"
+                  variant="elevated"
+                >
+                  {{ props.collectibles[i*4+j].Type }}
+                </v-chip>
+                <span
+                  style="font-weight: bold;"
+                  class="text-white pt-1"
+                >
+                  {{ getCollectibleText(i*4+j) }}
+                </span>
+
+                <!-- <v-card-title
+                  class="text-white ma-0 pa-0 pl-2"
+                >
+                  {{ props.collectibles[i*4+j].Type }}
+                </v-card-title>
+
+                <v-card-subtitle
+                  class="text-white ma-0 pa-0 pl-2"
+                >
+                  {{ getCollectibleText(i*4+j) }}
+                </v-card-subtitle> -->
+              </v-img>
+            </v-sheet>        
           </v-list-item>
 
         </v-col>
       </v-row>
 
-      <template v-if="current_collectible == '모코코 씨앗'">
+      <!-- <template v-if="current_collectible == '모코코 씨앗'">
         <PointMokokoVue
           width="1050px"
           height="450px"
         ></PointMokokoVue>
       </template>
-
       <template v-else-if="current_collectible == '섬의 마음'">
         <PointIslandVue
           width="1050px"
           height="450px"
         ></PointIslandVue>
       </template>
-
       <template v-else-if="current_collectible == '위대한 미술품'">
         <PointGreatPictureVue
           width="1050px"
           height="450px"
         ></PointGreatPictureVue>
       </template>
-
       <template v-else-if="current_collectible == '거인의 심장'">
         <PointGiantHeartsVue
           width="1050px"
           height="450px"
         ></PointGiantHeartsVue>
       </template>
-
       <template v-else-if="current_collectible == '이그네아의 징표'">
         <PointAdventureMedalVue
           width="1050px"
           height="450px"
         ></PointAdventureMedalVue>
       </template>
-
       <template v-else-if="current_collectible == '항해 모험물'">
         <PointVoyageVue
           width="1050px"
           height="450px"
         ></PointVoyageVue>
       </template>
-
       <template v-else-if="current_collectible == '세계수의 잎'">
         <PointWorldtreeVue
           width="1050px"
           height="450px"
         ></PointWorldtreeVue>
       </template>
-
       <template v-else-if="current_collectible == '오르페우스의 별'">
         <PointOrpeusStarVue
           width="1050px"
           height="450px"
         ></PointOrpeusStarVue>
       </template>
-
       <template v-else-if="current_collectible == '기억의 오르골'">
         <PointOrgelVue
           width="1050px"
           height="450px"
         ></PointOrgelVue>
-      </template>
+      </template> -->
 
     </template>
   </v-sheet>
@@ -135,6 +149,7 @@ const props = defineProps<{
   collectibles?: Array<ICollectible>
   mainColor: string
   bg: string
+  dev: boolean
 }>();
 
 const current_collectible = ref<string>("모코코 씨앗");
@@ -143,8 +158,8 @@ const onClickMenu = (type: string) => {
   current_collectible.value = type;
 }
 
-const isActive = (key: string) => {
-  if(current_collectible.value == key) {
+const isActive = (type: string) => {
+  if(current_collectible.value == type) {
     return true;
   } else {
     return false;

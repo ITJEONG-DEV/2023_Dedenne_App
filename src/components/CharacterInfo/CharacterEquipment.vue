@@ -27,7 +27,7 @@
             :height="item.value.Type == '팔찌' ? '32px' : '36px'"
           >
             <v-img
-              :src="item.value.Icon"
+              :src="props.dev ? '' : item.value.Icon"
               width="32px"
               height="32px"
             ></v-img>
@@ -86,6 +86,7 @@ import type { IArmoryEquipment, IEquipment } from '../Requests';
 const props = defineProps<{
     equipments?: Array<IEquipment>
     bg: string
+    dev: boolean
 }>();
 
 function getQualityText(tooltip: string): string {

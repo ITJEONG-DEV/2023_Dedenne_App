@@ -18,7 +18,7 @@
             height="36px"
           >
             <v-img
-              :src="item.Icon"
+              :src="props.dev ? '' : item.Icon"
             ></v-img>
           </v-card>
 
@@ -42,5 +42,6 @@ import type { IArmoryGem } from '../Requests';
 const props = defineProps<{
     gems?: IArmoryGem
     bg: string
+    dev: boolean
 }>();
 </script>

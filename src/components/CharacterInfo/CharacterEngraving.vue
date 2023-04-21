@@ -18,7 +18,7 @@
             class="mr-2"
           >
             <v-img
-              :src="item.Icon"
+              :src="props.dev ? '' : item.Icon"
             ></v-img>
           </v-avatar>
         </template>
@@ -56,5 +56,6 @@ import type { IArmoryEngraving } from '../Requests';
 const props = defineProps<{
     engraving?: IArmoryEngraving
     bg: string
+    dev: boolean
 }>();
 </script>

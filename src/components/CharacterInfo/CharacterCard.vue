@@ -12,7 +12,7 @@
         :key="item.Icon"
       >
         <v-card
-        variant="tonal"
+          variant="tonal"
           class="pa-0 ma-0"
           width="90px"
           height="130px"  
@@ -53,7 +53,7 @@
             />
           </template>
           <v-img
-            :src="item.Icon"
+            :src="props.dev ? '' : item.Icon"
           >
           </v-img>
         </v-card>
@@ -72,17 +72,18 @@
 </template>
 
 <script setup lang="ts">
-import { watch, ref } from 'vue'
-import type { IArmoryCard, ICardEffect } from '../Requests';
-import border_gold from '../assets/img_card_grade_gold.png'
-import border_purple from '../assets/img_card_grade_purple.png'
-import border_blue from '../assets/img_card_grade_blue.png'
-import border_green from '../assets/img_card_grade_green.png'
-import border_gray from '../assets/img_card_grade_gray.png'
+import { watch, ref, onMounted } from 'vue'
+import type { IArmoryCard, ICardEffect } from '../../Requests';
+import border_gold from '../../assets/img_card_grade_gold.png'
+import border_purple from '../../assets/img_card_grade_purple.png'
+import border_blue from '../../assets/img_card_grade_blue.png'
+import border_green from '../../assets/img_card_grade_green.png'
+import border_gray from '../../assets/img_card_grade_gray.png'
 
 const props = defineProps<{
     card?: IArmoryCard
     bg: string
+    dev: boolean
 }>();
 
 const effect = ref<string>("");
@@ -103,10 +104,8 @@ const getEffect = () => {
   }
 }
 
-
 watch(() => props.card, (first, second) => {
   effect.value = getEffect()
 })
-
 
 </script>

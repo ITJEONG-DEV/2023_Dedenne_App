@@ -1,13 +1,13 @@
 <template>
   <v-sheet
     class="pa-6 ma-2"
-    style="background-color: #15181D;"
+    style="background-color: #07080A;"
   >
     <template v-if="!search">
       <div
         id="character_input"
         class="pa-6 ma-2"
-        style="background-color: #15181D;"
+        style="background-color: #07080A;"
       >
         <v-text-field
           v-model="characterName"
@@ -33,7 +33,7 @@
       <div 
         id="default_profile"
         class="d-flex"
-        style="background-color: #15181D;"
+        style="background-color: #07080A;"
       >
         <CharacterDefaultProfile
           :data="profile"
@@ -46,6 +46,7 @@
           :data="profile"
           :bg="bgColor"
           :mainColor="props.mainColor"
+          :dev="props.dev"
         ></CharacterMainProfile>
 
       </div>
@@ -56,8 +57,8 @@
 
 <script setup lang="ts">
 import ContentsTitle from '../components/ContentsTitle.vue'
-import CharacterDefaultProfile from '../components/CharacterDefaultProfile.vue'
-import CharacterMainProfile from '../components/CharacterMainProfile.vue'
+import CharacterDefaultProfile from '../components/CharacterInfo/CharacterDefaultProfile.vue'
+import CharacterMainProfile from '../components/CharacterInfo/CharacterMainProfile.vue'
 import { onMounted, ref } from 'vue';
 import type { ICharacterInfo, IProfile  } from '../Requests'
 import { getCharactersSiblings, getArmoriesCharacters } from '../Requests'
