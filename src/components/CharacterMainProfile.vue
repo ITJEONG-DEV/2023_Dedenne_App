@@ -131,6 +131,7 @@ const bracelet = ref<IArmoryEquipment>();
 
 const menu_list = [
   { value: "전투", key: "battle"},
+  // { value: "스킬", key: "skill"},
   { value: "내실", key: "collectible"}
 ]
 
