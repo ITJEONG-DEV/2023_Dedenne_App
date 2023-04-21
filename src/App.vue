@@ -7,6 +7,7 @@
         @update-key="updateApiKeyValue"
         @update-mode="onChangeCurrentMenu"
         :menus="menus"
+        :current_menu="current_menu"
       ></LogoBar>
 
       <template v-if="current_menu=='NEWS'">

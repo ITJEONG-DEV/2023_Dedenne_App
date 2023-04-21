@@ -57,6 +57,7 @@
         :key="item.title"
         :value="item.key"
         :active-color="props.mainColor"
+        :active="isActive(item.key)"
         @click="onClickSideMenu(item.key)"
       >
         {{ item.title }}
@@ -75,6 +76,7 @@ const props = defineProps<{
   apiKey: string
   mainColor: string
   menus: Array<{title:string, key:string}>
+  current_menu: string
 }>();
 
 const emit = defineEmits<{
@@ -119,6 +121,14 @@ const checkCurrentButtonIcon = () => {
 const onClickSideMenu = (item: string) => {
   emit('update-mode', item);
   show_navigation_drawer.value = false;
+}
+
+const isActive = (key: string) => {
+  if(props.current_menu == key) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 onMounted(() => {
