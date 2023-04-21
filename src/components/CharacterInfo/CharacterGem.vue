@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import type { IArmoryGem } from '../Requests';
+import type { IArmoryGem } from '../../Requests';
 
 const props = defineProps<{
     gems?: IArmoryGem

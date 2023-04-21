@@ -5,7 +5,7 @@
   >
     <v-card
       color="#15181D"
-      width="500px"
+      width="470px"
       height="620px"
     >
       <template v-if="props.dev">
@@ -286,7 +286,7 @@
 </template>
 
 <script setup lang="ts">
-import type { IProfile } from '../Requests'
+import type { IProfile } from '../../Requests'
 
 const props = defineProps<{
   data?: IProfile

@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import type { IArmoryEngraving } from '../Requests';
+import type { IArmoryEngraving } from '../../Requests';
 
 const props = defineProps<{
     engraving?: IArmoryEngraving

@@ -13,62 +13,64 @@
       >
         <v-col cols="3"
           class="ma-0 pa-0"
-          v-for="j in [0, 1, 2, 3]"
-          :key="j"
+          v-for="item in props.collectibles.slice(4*i, 4*(i+1))"
+          :key="item.Type"
         >
-          <v-list-item
-            class="pa-0 ma-0"
-            width="262.5px"
-            height="275px"
-            :active-color="props.mainColor"
-            :active="isActive(props.collectibles[i*4+j].Type)"
-            @click="onClickMenu(props.collectibles[i*4+j].Type)"
-            border
-          >
-            <v-sheet
-              :style="'background: ' + props.bg + ';'"
-              class="ma-0 pa-0"
+          <template v-if="item != null">
+            <v-list-item
+              class="pa-0 ma-0"
               width="262.5px"
               height="275px"
+              :active-color="props.mainColor"
+              :active="isActive(item.Type)"
+              @click="onClickMenu(item.Type)"
+              border
             >
-              <v-img
-                cover
-                class="align-end"
+              <v-sheet
+                :style="'background: ' + props.bg + ';'"
+                class="ma-0 pa-0"
                 width="262.5px"
                 height="275px"
-                :src="props.dev ? '' : props.collectibles[i*4+j].Icon"
               >
-                <v-spacer></v-spacer>
+                <v-img
+                  cover
+                  class="align-end"
+                  width="262.5px"
+                  height="275px"
+                  :src="props.dev ? '' : item.Icon"
+                >
+                  <v-spacer></v-spacer>
 
-                <v-chip
-                  style="font-weight: bold;"
-                  class="ml-3 mr-2 my-4"
-                  color="white"
-                  variant="elevated"
-                >
-                  {{ props.collectibles[i*4+j].Type }}
-                </v-chip>
-                <span
-                  style="font-weight: bold;"
-                  class="text-white pt-1"
-                >
-                  {{ getCollectibleText(i*4+j) }}
-                </span>
+                  <v-chip
+                    style="font-weight: bold;"
+                    class="ml-3 mr-2 my-4"
+                    color="white"
+                    variant="elevated"
+                  >
+                    {{ item.Type }}
+                  </v-chip>
+                  <span
+                    style="font-weight: bold;"
+                    class="text-white pt-1"
+                  >
+                    {{ getCollectibleText(item) }}
+                  </span>
 
-                <!-- <v-card-title
-                  class="text-white ma-0 pa-0 pl-2"
-                >
-                  {{ props.collectibles[i*4+j].Type }}
-                </v-card-title>
+                  <!-- <v-card-title
+                    class="text-white ma-0 pa-0 pl-2"
+                  >
+                    {{ props.collectibles[i*4+j].Type }}
+                  </v-card-title>
 
-                <v-card-subtitle
-                  class="text-white ma-0 pa-0 pl-2"
-                >
-                  {{ getCollectibleText(i*4+j) }}
-                </v-card-subtitle> -->
-              </v-img>
-            </v-sheet>        
-          </v-list-item>
+                  <v-card-subtitle
+                    class="text-white ma-0 pa-0 pl-2"
+                  >
+                    {{ getCollectibleText(i*4+j) }}
+                  </v-card-subtitle> -->
+                </v-img>
+              </v-sheet>        
+            </v-list-item>
+          </template>
 
         </v-col>
       </v-row>
@@ -134,16 +136,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { ICollectible } from '../Requests'
-import PointMokokoVue from './Collectibles/PointMokoko.vue'
-import PointIslandVue from './Collectibles/PointIsland.vue'
-import PointGreatPictureVue from './Collectibles/PointGreatPicture.vue'
-import PointGiantHeartsVue from './Collectibles/PointGiantHearts.vue'
-import PointAdventureMedalVue from './Collectibles/PointAdventureMedal.vue'
-import PointVoyageVue from './Collectibles/PointVoyage.vue'
-import PointWorldtreeVue from './Collectibles/PointWorldtree.vue'
-import PointOrpeusStarVue from './Collectibles/PointOrpeusStar.vue'
-import PointOrgelVue from './Collectibles/PointOrgel.vue'
+import type { ICollectible } from '../../Requests'
+import PointMokokoVue from './../Collectibles/PointMokoko.vue'
+import PointIslandVue from './../Collectibles/PointIsland.vue'
+import PointGreatPictureVue from './../Collectibles/PointGreatPicture.vue'
+import PointGiantHeartsVue from './../Collectibles/PointGiantHearts.vue'
+import PointAdventureMedalVue from './../Collectibles/PointAdventureMedal.vue'
+import PointVoyageVue from './../Collectibles/PointVoyage.vue'
+import PointWorldtreeVue from './../Collectibles/PointWorldtree.vue'
+import PointOrpeusStarVue from './../Collectibles/PointOrpeusStar.vue'
+import PointOrgelVue from './../Collectibles/PointOrgel.vue'
 
 const props = defineProps<{
   collectibles?: Array<ICollectible>
@@ -166,12 +168,10 @@ const isActive = (type: string) => {
   }
 }
 
-const getCollectibleText = (index: number) => {
+const getCollectibleText = (item: ICollectible) => {
   if(props.collectibles == null) {
     return "";
   }
-
-  let item = props.collectibles[index];
 
   return item.Point + " / " + item.MaxPoint + " (" + Math.floor(item.Point/item.MaxPoint * 100) + "%)";
 }

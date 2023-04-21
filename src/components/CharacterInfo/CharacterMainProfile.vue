@@ -117,7 +117,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-import type { IProfile, IArmoryEquipment, IEquipment } from '../Requests'
+import type { IProfile, IArmoryEquipment, IEquipment } from '../../Requests'
 import CharacterEquipmentVue from './CharacterEquipment.vue'
 import CharacterGemVue from './CharacterGem.vue'
 import CharacterCardVue from './CharacterCard.vue'

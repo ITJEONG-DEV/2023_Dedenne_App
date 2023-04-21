@@ -81,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import type { IArmoryEquipment, IEquipment } from '../Requests';
+import type { IArmoryEquipment, IEquipment } from '../../Requests';
 
 const props = defineProps<{
     equipments?: Array<IEquipment>
