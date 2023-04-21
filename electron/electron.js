@@ -10,8 +10,8 @@ let trayIndex = 0, trayAnimationId = null
 const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1280,
+    height: 720,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
@@ -27,6 +27,11 @@ const createWindow = () => {
       ? 'http://localhost:5173'
       : `file://${path.join(__dirname, '../dist/index.html')}`
   );
+
+  mainWindow.on('ready-to-show', () => {
+    mainWindow.webContents.setZoomFactor(0.66);
+  })
+
   // Open the DevTools.
   if (isDev) {
     mainWindow.webContents.openDevTools();

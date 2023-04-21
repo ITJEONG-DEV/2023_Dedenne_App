@@ -138,11 +138,11 @@ const bracelet = ref<IArmoryEquipment>();
 
 const menu_list = [
   { value: "전투", key: "battle"},
-  // { value: "스킬", key: "skill"},
+  { value : "아바타", key:"avatars"},
   { value: "내실", key: "collectible"}
 ]
 
-const current_menu = ref<string>("battle")
+const current_menu = ref<string>("collectible")
 
 const onClickMenu = (key: string) => {
   current_menu.value = key;
