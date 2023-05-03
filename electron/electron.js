@@ -1,11 +1,16 @@
 // electron/electron.js
 const path = require('path');
+
 const { app, BrowserWindow, Menu, Tray } = require('electron');
+const log = require('electron-log')
+
+const updater = require('./updater.js')
 
 const isDev = process.env.IS_DEV == "true" ? true : false;
 
 let mainWindow, tray, trayMenu;
 let trayIndex = 0, trayAnimationId = null
+let update_check_interval_id = null
 
 const createWindow = () => {
   // Create the browser window.
@@ -80,21 +85,22 @@ const stopTrayIconAnimation = () => {
   trayAnimationId = null
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  createWindow();
-  app.on('activate', function () {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
-  })
+
+  updater.checkUpdate();
+
+  update_check_interval_id = setInterval(() => {
+    if(updater.updateResult() == 0) {
+      createWindow();
+      app.on('activate', function () {
+        if (BrowserWindow.getAllWindows().length === 0) createWindow();
+      })
+
+      clearInterval(update_check_interval_id);
+    }
+  }, 20);
 });
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     stopTrayIconAnimation();

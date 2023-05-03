@@ -62,7 +62,7 @@ import GameContentsVue from './vue/GameContents.vue'
 import { setApiKey } from './Requests'
 
 const apiKey = ref<string>("");
-const dev = true;
+const dev = false;
 
 // red pink purple
 // deep-purple indigo blue
