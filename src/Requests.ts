@@ -1,5 +1,3 @@
-import { ref } from "vue";
-
 let apiKey = "";
 
 const baseUrl = "https://developer-lostark.game.onstove.com/";
@@ -70,7 +68,7 @@ async function POST_request(url: string, data: JSON | null): Promise<JSON | null
 
 const timeGap = 10*60*1000;
 function checkTimeGap(loadedDate: string): boolean {
-  return new Date().getUTCMilliseconds() - Date.parse(loadedDate) > timeGap;
+  return Date.now() - Number(loadedDate) > timeGap;
 }
 
 async function request(url: string, method: string, data: JSON | null = null, force: boolean): Promise<JSON | null> {
@@ -98,10 +96,10 @@ async function request(url: string, method: string, data: JSON | null = null, fo
   const result = method == "GET" ? await GET_request(url) : await POST_request(url, data);
 
   if(result != null) {
-      const json = {
-        "payload" : result,
-        "date": new Date().toString()
-      }
+    const json = {
+      "payload" : result,
+      "date": Date.now().toString()
+    }
 
     localStorage.setItem(url, JSON.stringify(json));
   }
