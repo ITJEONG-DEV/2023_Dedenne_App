@@ -65,6 +65,42 @@
     </v-list>
   </v-navigation-drawer>
 
+  <v-dialog
+    v-model="show_dialog"
+    width="500px"
+    height="500px"
+  >
+    <v-card
+      class="pa-2"
+    >
+      <v-card-title
+        :color="props.mainColor + '-lighten-5'"
+      >API Key 입력</v-card-title>
+      <div
+        class="d-flex ma-4"
+      >
+        <v-text-field
+          class="shrink"
+          v-model="apiKey"
+          label="API Key"
+          variant="underlined"
+        ></v-text-field>
+        <v-btn
+          :icon="icon_style"
+          @click="onClickApplyAPIButton();"
+        ></v-btn>
+      </div>
+
+      <v-card-actions>
+        <v-btn
+          href="https://developer-lostark.game.onstove.com/clients"
+          target="_blank"
+        >
+          API Key 발급하기
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 
 </template>
 
@@ -90,7 +126,8 @@ const height = 32;
 const disabled = ref(false);
 const icon_style = ref("mdi-pencil");
 
-const show_navigation_drawer = ref(false);
+const show_navigation_drawer = ref<boolean>(false);
+const show_dialog = ref<boolean>(true);
 
 const apiKey = ref<string>("");
 
@@ -135,6 +172,7 @@ onMounted(() => {
   apiKey.value = props.apiKey;
   if(props.apiKey != "") {
     disabled.value = true;
+    show_dialog.value = false;
   }
   checkCurrentButtonIcon();
 })
